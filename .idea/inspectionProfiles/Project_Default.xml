@@ -1,0 +1,41 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="9">
+            <item index="0" class="java.lang.String" itemvalue="tqdm" />
+            <item index="1" class="java.lang.String" itemvalue="pandas" />
+            <item index="2" class="java.lang.String" itemvalue="flashtext" />
+            <item index="3" class="java.lang.String" itemvalue="Keras" />
+            <item index="4" class="java.lang.String" itemvalue="pyArango" />
+            <item index="5" class="java.lang.String" itemvalue="bert4keras" />
+            <item index="6" class="java.lang.String" itemvalue="jieba" />
+            <item index="7" class="java.lang.String" itemvalue="numpy" />
+            <item index="8" class="java.lang.String" itemvalue="tensorflow" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="compare_char.CompareChar.__getitem__" />
+          <option value="word" />
+          <option value="top_question" />
+          <option value="save" />
+          <option value="results" />
+          <option value="dict.get" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -1,0 +1,7 @@
+sadness
+like
+happiness
+fear
+disgust
+surprise
+anger
