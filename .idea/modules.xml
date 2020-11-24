@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Bert-Chinese-Text-Classification-Pytorch.iml" filepath="$PROJECT_DIR$/.idea/Bert-Chinese-Text-Classification-Pytorch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/NLP_bert.iml" filepath="$PROJECT_DIR$/.idea/NLP_bert.iml" />
     </modules>
   </component>
 </project>
