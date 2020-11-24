@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Bert-Chinese-Text-Classification-Pytorch.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-    </list>
+    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +29,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -127,7 +123,21 @@
       <option name="project" value="LOCAL" />
       <updated>1606183814849</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="first commit">
+      <created>1606184676416</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606184676416</updated>
+    </task>
+    <task id="LOCAL-00003" summary="first commit">
+      <created>1606184738841</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606184738841</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -136,10 +146,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="244" y="0" key="CommitChangelistDialog2" timestamp="1606183812708">
+    <state x="244" y="0" key="CommitChangelistDialog2" timestamp="1606184737648">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606183812708" />
+    <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184737648" />
+    <state x="121" y="55" key="DiffContextDialog" timestamp="1606184699163">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="121" y="55" key="DiffContextDialog/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184699163" />
     <state x="420" y="115" key="FileChooserDialogImpl" timestamp="1606184617249">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -178,10 +192,10 @@
     </state>
     <state x="142" y="5" key="SettingsEditor/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184632408" />
     <state x="2133" y="8" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606037022854" />
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606184462611">
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606184746097">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184462611" />
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184746097" />
     <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1606133079417">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
