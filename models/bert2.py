@@ -9,11 +9,11 @@ class Config(object):
 
     """配置参数"""
     def __init__(self, dataset):
-        self.model_name = 'bert'
-        self.train_path = dataset + '/data/OCEMOTION_train.csv'                                # 训练集
-        self.test_path = dataset + '/data/OCEMOTION_a.csv'                                  # 测试集
-        self.class_list = ['sadness', 'like', 'happiness', 'fear', 'disgust', 'surprise', 'anger']
-        #self.class_list = [0,1,2]
+        self.model_name = 'bert2'
+        self.train_path = dataset + '/data/OCNLI_train.csv'                                # 训练集
+        self.test_path = dataset + '/data/OCNLI_a.csv'                                  # 测试集
+        #self.class_list = ['sadness', 'like', 'happiness', 'fear', 'disgust', 'surprise', 'anger']
+        self.class_list = [0,1,2]
         #self.class_list = [x.strip() for x in open(dataset + '/data/class.txt').readlines()]   # 类别名单
         self.save_path = dataset + '/saved_dict/' + self.model_name + '.ckpt'        # 模型训练结果
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')   # 设备
@@ -22,13 +22,13 @@ class Config(object):
         self.num_classes = len(self.class_list)                         # 类别数
         self.num_epochs = 3                                             # epoch数
         self.batch_size = 128                                           # mini-batch大小
-        self.pad_size = 64                                              # 每句话处理成的长度(短填长切)
+        self.pad_size = 32                                              # 每句话处理成的长度(短填长切)
         self.learning_rate = 5e-5                                       # 学习率
         self.bert_path = './bert_pretrain'
         # 读取预置的 Tokenizer
         self.tokenizer = BertTokenizer.from_pretrained(self.bert_path)
         self.hidden_size = 768
-        self.submit_output_path = './submit/ocemotion_predict.json'     # 提交结果输出路径
+        self.submit_output_path = './submit/ocnli_predict.json'     # 提交结果输出路径
 
 
 class Model(nn.Module):
