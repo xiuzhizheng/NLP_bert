@@ -70,13 +70,12 @@ def submit_test(config, model, test_iter, output_path):
             json_str = json.dumps(each)  # dumps
             f.write(json_str)
             f.write('\n')
-        
 
 
 if __name__ == '__main__':
     dataset = '.'  # 数据集
 
-    model_name = 'bert'  # bert
+    model_name = 'bert3'  # bert
     # 动态导入模块
     x = import_module('models.' + model_name)
     # 配置参数

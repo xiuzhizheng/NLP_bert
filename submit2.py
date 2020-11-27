@@ -4,35 +4,50 @@ import pandas as pd
 from tqdm import tqdm
 import numpy as np
 from importlib import import_module
-from utils import DatasetIterater
+from utils2 import DatasetIterater
 
 PAD, CLS = '[PAD]', '[CLS]'  # padding符号, bert中综合信息符号
 
 
 def load_testdata(config, path, pad_size=32):
-    contents = []
-    data = pd.read_csv(path, names=['content'], sep='\t')
-    for i in tqdm(range(len(data))):
-        content = data.iloc[i]['content']
-        # todo
-        # 为什么都是按单词分割
-        token = config.tokenizer.tokenize(content)
-        token = [CLS] + token
-        seq_len = len(token)
-        mask = []
-        # 找到每个字对应的下标
-        token_ids = config.tokenizer.convert_tokens_to_ids(token)
+    data = pd.read_csv('./data/OCNLI_a.csv', names=['content1', 'content2'], sep='\t')
+        
+    def get_contents(data,item='content'):
+        contents = []
+        for i in tqdm(range(len(data))):
+            content= data.iloc[i][item]
+            # todo
+            # 为什么都是按单词分割
+            token = config.tokenizer.tokenize(content)
+            token = [CLS] + token
+            seq_len = len(token)
+            mask = []
+            # 找到每个字对应的下标
+            token_ids = config.tokenizer.convert_tokens_to_ids(token)
 
-        if pad_size:
-            if len(token) < pad_size:
-                mask = [1] * len(token_ids) + [0] * (pad_size - len(token))
-                token_ids += ([0] * (pad_size - len(token)))
-            else:
-                mask = [1] * pad_size
-                token_ids = token_ids[:pad_size]
-                seq_len = pad_size
-        contents.append((token_ids, 1, seq_len, mask))
+            if pad_size:
+                if len(token) < pad_size:
+                    mask = [1] * len(token_ids) + [0] * (pad_size - len(token))
+                    token_ids += ([0] * (pad_size - len(token)))
+                else:
+                    mask = [1] * pad_size
+                    token_ids = token_ids[:pad_size]
+                    seq_len = pad_size
+            contents.append((token_ids, 1, seq_len, mask))
+        return contents
+        
+    contents1 = get_contents(data,item='content1')
+    contents2 = get_contents(data,item='content2')
+    contents = []
+    for i in range(len(contents1)):
+        token_ids = contents1[i][0]+contents2[i][0]
+        mask = contents1[i][3]+contents2[i][3]
+        seq_len = contents1[i][2]*2
+        contents.append((token_ids, 1,seq_len,mask))
+
     return contents
+
+ 
 
 
 def submit_iterator(dataset, config, batch_size):
@@ -70,13 +85,12 @@ def submit_test(config, model, test_iter, output_path):
             json_str = json.dumps(each)  # dumps
             f.write(json_str)
             f.write('\n')
-        
 
 
 if __name__ == '__main__':
     dataset = '.'  # 数据集
 
-    model_name = 'bert'  # bert
+    model_name = 'bert2'  # bert
     # 动态导入模块
     x = import_module('models.' + model_name)
     # 配置参数

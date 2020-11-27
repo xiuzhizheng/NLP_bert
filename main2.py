@@ -6,11 +6,12 @@ import pandas as pd
 from train_eval import train, init_network
 from importlib import import_module
 import argparse
-from utils import build_dataset, build_iterator, get_time_dif
+from utils2 import build_dataset, build_iterator, get_time_dif
+
 
 dataset = '.'  # 数据集
 
-model_name = 'bert'  # bert
+model_name = 'bert2'  # bert
 # model_name = args.model  # bert
 # 动态导入模块
 x = import_module('models.' + model_name)
@@ -25,6 +26,7 @@ torch.manual_seed(1)
 torch.cuda.manual_seed_all(1)
 # 这个参数为True, 每次返回的卷积算法将是确定的，即默认算法
 torch.backends.cudnn.deterministic = True  # 保证每次结果一样
+
 
 start_time = time.time()
 print("Loading data...")
