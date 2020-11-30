@@ -28,12 +28,16 @@ torch.backends.cudnn.deterministic = True  # 保证每次结果一样
 
 start_time = time.time()
 print("Loading data...")
-train_data, dev_data = build_dataset(config)
-train_iter = build_iterator(train_data, config)
-dev_iter = build_iterator(dev_data, config)
+OCNLI_train, OCNLI_dev, OCEMOTION_train, OCEMOTION_dev, TNEWS_train, TNEWS_dev = build_dataset(config, mode='train')
+OCNLI_train_iter = build_iterator(OCNLI_train, config)
+OCEMOTION_train_iter = build_iterator(OCEMOTION_train, config)
+TNEWS_train_iter = build_iterator(TNEWS_train, config)
+OCNLI_dev_iter = build_iterator(OCNLI_dev, config)
+OCEMOTION_dev_iter = build_iterator(OCEMOTION_dev, config)
+TNEWS_dev_iter = build_iterator(TNEWS_dev, config)
 
 time_dif = get_time_dif(start_time)
 
 # train
 model = x.Model(config).to(config.device)
-train(config, model, train_iter,dev_iter)
+train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter, OCEMOTION_dev_iter, TNEWS_train_iter, TNEWS_dev_iter)

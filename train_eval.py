@@ -28,7 +28,7 @@ def init_network(model, method='xavier', exclude='embedding', seed=123):
                 pass
 
 
-def train(config, model, train_iter, dev_iter):
+def train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter, OCEMOTION_dev_iter, TNEWS_train_iter, TNEWS_dev_iter):
     start_time = time.time()
     model.train()
     param_optimizer = list(model.named_parameters())
@@ -37,21 +37,31 @@ def train(config, model, train_iter, dev_iter):
         {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)], 'weight_decay': 0.01},
         {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}]
     # optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
+    # t_total: total number of training steps for the learning
+    t_total = max([len(OCNLI_train_iter), len(OCEMOTION_train_iter), len(TNEWS_train_iter)]) * 3 * config.num_epochs
     optimizer = BertAdam(optimizer_grouped_parameters,
                          lr=config.learning_rate,
                          warmup=0.05,
-                         t_total=len(train_iter) * config.num_epochs)
+                         t_total=t_total)
     total_batch = 0  # 记录进行到多少batch
-    dev_best_loss = float('inf')
     last_improve = 0  # 记录上次验证集loss下降的batch数
     flag = False  # 记录是否很久没有效果提升
     model.train()
     for epoch in range(config.num_epochs):
         print('Epoch [{}/{}]'.format(epoch + 1, config.num_epochs))
-        for i, (trains, labels) in enumerate(train_iter):
-            outputs = model(trains)
+        for i in range(t_total):
+            if total_batch % 3 == 0:
+                trains, labels = next(OCNLI_train_iter, next(OCNLI_train_iter))
+            elif total_batch % 3 == 1:
+                trains, labels = next(OCEMOTION_train_iter, next(OCEMOTION_train_iter))
+            else:
+                trains, labels = next(TNEWS_train_iter, next(TNEWS_train_iter))
+
+            outputs = model(trains, total_batch)
             model.zero_grad()
+
             loss = F.cross_entropy(outputs, labels)
+
             loss.backward()
             optimizer.step()
             if total_batch % 100 == 0:
@@ -59,26 +69,22 @@ def train(config, model, train_iter, dev_iter):
                 true = labels.data.cpu()
                 predic = torch.max(outputs.data, 1)[1].cpu()
                 train_acc = metrics.accuracy_score(true, predic)
-                dev_acc, dev_loss = evaluate(config, model, dev_iter)
-                if dev_loss < dev_best_loss:
-                    dev_best_loss = dev_loss
-                    torch.save(model.state_dict(), config.save_path)
-                    improve = '*'
-                    last_improve = total_batch
+                if total_batch % 3 == 0:
+                    dev_acc, dev_loss = evaluate(config, model, total_batch, OCNLI_dev_iter)
+                    msg = 'OCNLI_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
+                          'Val Acc: {4:>6.2%},  Time: {5} '
+                elif total_batch % 3 == 1:
+                    dev_acc, dev_loss = evaluate(config, model, total_batch, OCEMOTION_dev_iter)
+                    msg = 'OCEMOTION_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
+                          'Val Acc: {4:>6.2%},  Time: {5} '
                 else:
-                    improve = ''
+                    dev_acc, dev_loss = evaluate(config, model, total_batch, TNEWS_dev_iter)
+                    msg = 'TNEWS_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
+                          'Val Acc: {4:>6.2%},  Time: {5} '
                 time_dif = get_time_dif(start_time)
-                msg = 'Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  Val Acc: {4:>6.2%},  Time: {5} {6}'
-                print(msg.format(total_batch, loss.item(), train_acc, dev_loss, dev_acc, time_dif, improve))
+                print(msg.format(total_batch, loss.item(), train_acc, dev_loss, dev_acc, time_dif))
                 model.train()
             total_batch += 1
-            if total_batch - last_improve > config.require_improvement:
-                # 验证集loss超过1000batch没下降，结束训练
-                print("No optimization for a long time, auto-stopping...")
-                flag = True
-                break
-        if flag:
-            break
 #     test(config, model, test_iter)
 
 
@@ -98,14 +104,14 @@ def test(config, model, test_iter):
     print("Time usage:", time_dif)
 
 
-def evaluate(config, model, data_iter, test=False):
+def evaluate(config, model, total_batch, data_iter, test=False):
     model.eval()
     loss_total = 0
     predict_all = np.array([], dtype=int)
     labels_all = np.array([], dtype=int)
     with torch.no_grad():
         for texts, labels in data_iter:
-            outputs = model(texts)
+            outputs = model(texts, total_batch)
             loss = F.cross_entropy(outputs, labels)
             loss_total += loss
             labels = labels.data.cpu().numpy()

@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bert_pretrain/README.md" afterDir="false" />
+    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="first commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/OCEMOTION_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/OCEMOTION_train.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/OCNLI_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/OCNLI_train.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TNEWS_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/TNEWS_train.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/bert.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/bert.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/bert2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/bert3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_dict/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit.py" beforeDir="false" afterPath="$PROJECT_DIR$/submit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_eval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils2.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +36,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1kXkulzKXXVHUUpYbnJH0Jza4VQ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -35,17 +49,17 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.submit">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Bert-Chinese-Text-Classification-Pytorch" />
+      <module name="NLP_bert" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="D:\Anaconda3\envs\nlp\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
@@ -101,8 +115,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.submit" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.submit" />
         <item itemvalue="Python.run" />
       </list>
     </recent_temporary>
@@ -139,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606184738841</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="first commit">
+      <created>1606186130975</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606186130975</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -148,60 +169,69 @@
     <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="244" y="0" key="CommitChangelistDialog2" timestamp="1606184737648">
+    <state x="340" y="0" key="#main" timestamp="1606549184131">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184737648" />
+    <state x="340" y="0" key="#main/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606549184131" />
+    <state x="244" y="0" key="CommitChangelistDialog2" timestamp="1606555238062">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606186129603" />
+    <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606555238062" />
     <state x="121" y="55" key="DiffContextDialog" timestamp="1606184699163">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="121" y="55" key="DiffContextDialog/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184699163" />
-    <state x="420" y="115" key="FileChooserDialogImpl" timestamp="1606184617249">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="2550" y="173" key="FileChooserDialogImpl" timestamp="1606484272267">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="-1290" y="173" key="FileChooserDialogImpl/0.0.1280.720/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606287304623" />
     <state x="420" y="115" key="FileChooserDialogImpl/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184617249" />
-    <state x="2550" y="173" key="FileChooserDialogImpl/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606038176521" />
-    <state width="1259" height="48" key="GridCell.Tab.0.bottom" timestamp="1606182946445">
+    <state x="2550" y="173" key="FileChooserDialogImpl/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606484272267" />
+    <state width="1259" height="300" key="GridCell.Tab.0.bottom" timestamp="1606551353995">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state width="1259" height="48" key="GridCell.Tab.0.bottom/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606182946445" />
-    <state width="1259" height="182" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606136654335" />
+    <state width="1259" height="300" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606551353995" />
     <state width="1899" height="369" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606041207946" />
     <state width="1259" height="182" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1606182164567" />
-    <state width="1259" height="48" key="GridCell.Tab.0.center" timestamp="1606182946445">
+    <state width="1259" height="300" key="GridCell.Tab.0.center" timestamp="1606551353995">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state width="1259" height="48" key="GridCell.Tab.0.center/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606182946445" />
-    <state width="1259" height="182" key="GridCell.Tab.0.center/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606136654335" />
+    <state width="1259" height="300" key="GridCell.Tab.0.center/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606551353995" />
     <state width="1899" height="369" key="GridCell.Tab.0.center/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606041207946" />
     <state width="1259" height="182" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1606182164567" />
-    <state width="1259" height="48" key="GridCell.Tab.0.left" timestamp="1606182946445">
+    <state width="1259" height="300" key="GridCell.Tab.0.left" timestamp="1606551353995">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state width="1259" height="48" key="GridCell.Tab.0.left/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606182946445" />
-    <state width="1259" height="182" key="GridCell.Tab.0.left/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606136654335" />
+    <state width="1259" height="300" key="GridCell.Tab.0.left/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606551353995" />
     <state width="1899" height="369" key="GridCell.Tab.0.left/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606041207945" />
     <state width="1259" height="182" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1606182164567" />
-    <state width="1259" height="48" key="GridCell.Tab.0.right" timestamp="1606182946445">
+    <state width="1259" height="300" key="GridCell.Tab.0.right" timestamp="1606551353995">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state width="1259" height="48" key="GridCell.Tab.0.right/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606182946445" />
-    <state width="1259" height="182" key="GridCell.Tab.0.right/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606136654335" />
+    <state width="1259" height="300" key="GridCell.Tab.0.right/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606551353995" />
     <state width="1899" height="369" key="GridCell.Tab.0.right/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606041207946" />
     <state width="1259" height="182" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1606182164567" />
-    <state x="142" y="5" key="SettingsEditor" timestamp="1606184632408">
+    <state x="142" y="5" key="SettingsEditor" timestamp="1606549171305">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="-1707" y="8" key="SettingsEditor/0.0.1280.720/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606186481681" />
     <state x="142" y="5" key="SettingsEditor/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184632408" />
+    <state x="142" y="5" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606549171305" />
     <state x="2133" y="8" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606037022854" />
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606184746097">
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606186140699">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184746097" />
-    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606185888175">
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606186140699" />
+    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606484288133">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606185888175" />
+    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606186326941" />
+    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606484288133" />
     <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1606133079417">
       <screen x="0" y="0" width="1280" height="720" />
     </state>

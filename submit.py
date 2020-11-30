@@ -5,6 +5,7 @@ from tqdm import tqdm
 import numpy as np
 from importlib import import_module
 from utils import DatasetIterater
+from utils import build_dataset
 
 PAD, CLS = '[PAD]', '[CLS]'  # padding符号, bert中综合信息符号
 
@@ -40,28 +41,34 @@ def submit_iterator(dataset, config, batch_size):
     return iter
 
 
-def submit_evaluate(model, data_iter):
+def submit_evaluate(model, data_iter, task_type):
     model.eval()
     predict_all = np.array([], dtype=int)
     with torch.no_grad():
         for texts, labels in data_iter:
-            outputs = model(texts)
+            outputs = model(texts, task_type)
             predic = torch.max(outputs.data, 1)[1].cpu().numpy()
             predict_all = np.append(predict_all, predic)
     return predict_all
 
 
-def submit_test(config, model, test_iter, output_path):
+def submit_test(config, model, test_iter, output_path, task_type):
+    """
+    type: 0 OCNLI
+          1 OCEMOTION
+          2 TNEWS
+    """
     # test
     model.load_state_dict(torch.load(config.save_path))
     model.eval()
-    predict_label = submit_evaluate(model, test_iter)
+    predict_label = submit_evaluate(model, test_iter, task_type)
     final_result = []
     
     for i in range(len(predict_label)):
-        dic = {}
-        dic["id"] = str(i)
-        dic["label"] = str(config.class_list[predict_label[i]])
+        dic = {
+            "id": str(i),
+            "label": str(config.class_list[predict_label[i]])
+        }
         final_result.append(dic)
     # 输出json文件
     import json
@@ -71,7 +78,6 @@ def submit_test(config, model, test_iter, output_path):
             f.write(json_str)
             f.write('\n')
         
-
 
 if __name__ == '__main__':
     dataset = '.'  # 数据集
@@ -92,6 +98,12 @@ if __name__ == '__main__':
     torch.backends.cudnn.deterministic = True  # 保证每次结果一样
     model = x.Model(config).to(config.device)
 
-    test_data = load_testdata(config, config.test_path, pad_size=32)
-    test_iter = submit_iterator(test_data, config, len(test_data))
-    submit_test(config, model, test_iter, config.submit_output_path)
+    OCNLI_test, OCEMOTION_test, TNEWS_test = build_dataset(config, mode='test')
+    OCNLI_test_iter = submit_iterator(OCNLI_test, config, len(OCNLI_test))
+    OCEMOTION_test_iter = submit_iterator(OCEMOTION_test, config, len(OCEMOTION_test))
+    TNEWS_test_iter = submit_iterator(TNEWS_test, config, len(TNEWS_test))
+    # 第一个任务的提交
+    submit_test(config, model, OCNLI_test_iter, config.OCLI_submit_output_path, 0)
+    submit_test(config, model, OCEMOTION_test_iter, config.OCEMOTION_submit_output_path, 1)
+    submit_test(config, model, TNEWS_test_iter, config.TNEWS_submit_output_path, 2)
+
