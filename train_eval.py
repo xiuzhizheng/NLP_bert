@@ -51,11 +51,13 @@ def train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter,
         print('Epoch [{}/{}]'.format(epoch + 1, config.num_epochs))
         for i in range(t_total):
             if total_batch % 3 == 0:
-                trains, labels = next(OCNLI_train_iter, next(OCNLI_train_iter))
+                trains, labels = next(OCNLI_train_iter, (None, None))
             elif total_batch % 3 == 1:
-                trains, labels = next(OCEMOTION_train_iter, next(OCEMOTION_train_iter))
+                trains, labels = next(OCEMOTION_train_iter, (None, None))
             else:
-                trains, labels = next(TNEWS_train_iter, next(TNEWS_train_iter))
+                trains, labels = next(TNEWS_train_iter, (None, None))
+            if train is None or labels is None:
+                continue
 
             outputs = model(trains, total_batch)
             model.zero_grad()
@@ -85,6 +87,7 @@ def train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter,
                 print(msg.format(total_batch, loss.item(), train_acc, dev_loss, dev_acc, time_dif))
                 model.train()
             total_batch += 1
+    torch.save(model.state_dict(), config.save_path)
 #     test(config, model, test_iter)
 
 

@@ -65,10 +65,21 @@ def submit_test(config, model, test_iter, output_path, task_type):
     final_result = []
     
     for i in range(len(predict_label)):
-        dic = {
-            "id": str(i),
-            "label": str(config.class_list[predict_label[i]])
-        }
+        if task_type % 3 == 0:
+            dic = {
+                "id": str(i),
+                "label": str(config.OCLI_class_list[predict_label[i]])
+            }
+        elif task_type % 3 == 1:
+            dic = {
+                "id": str(i),
+                "label": str(config.OCEMOTION_class_list[predict_label[i]])
+            }
+        else:
+            dic = {
+                "id": str(i),
+                "label": str(config.TNEWS_class_list[predict_label[i]])
+            }
         final_result.append(dic)
     # 输出json文件
     import json

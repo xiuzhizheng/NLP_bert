@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="first commit">
+    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/OCEMOTION_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/OCEMOTION_train.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/OCNLI_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/OCNLI_train.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/TNEWS_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/TNEWS_train.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main3.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/models/bert.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/bert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/bert2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/bert3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saved_dict/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/submit.py" beforeDir="false" afterPath="$PROJECT_DIR$/submit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/submit2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/submit3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit/ocemotion_predict.json" beforeDir="false" afterPath="$PROJECT_DIR$/submit/ocemotion_predict.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train_eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_eval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils2.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,33 +148,41 @@
       <option name="project" value="LOCAL" />
       <updated>1606186130975</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="merge model">
+      <created>1606698561931</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1606698561931</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="merge model" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge model" />
   </component>
   <component name="WindowStateProjectService">
     <state x="340" y="0" key="#main" timestamp="1606549184131">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="340" y="0" key="#main/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606549184131" />
-    <state x="244" y="0" key="CommitChangelistDialog2" timestamp="1606555238062">
+    <state x="245" y="0" key="CommitChangelistDialog2" timestamp="1606698557859">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606186129603" />
+    <state x="245" y="0" key="CommitChangelistDialog2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606698557859" />
     <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606555238062" />
     <state x="121" y="55" key="DiffContextDialog" timestamp="1606184699163">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="121" y="55" key="DiffContextDialog/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184699163" />
-    <state x="2550" y="173" key="FileChooserDialogImpl" timestamp="1606484272267">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="420" y="115" key="FileChooserDialogImpl" timestamp="1606720270025">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="-1290" y="173" key="FileChooserDialogImpl/0.0.1280.720/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606287304623" />
-    <state x="420" y="115" key="FileChooserDialogImpl/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184617249" />
+    <state x="420" y="115" key="FileChooserDialogImpl/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606720270025" />
     <state x="2550" y="173" key="FileChooserDialogImpl/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606484272267" />
     <state width="1259" height="300" key="GridCell.Tab.0.bottom" timestamp="1606551353995">
       <screen x="0" y="0" width="1280" height="720" />
@@ -223,10 +219,10 @@
     <state x="142" y="5" key="SettingsEditor/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184632408" />
     <state x="142" y="5" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606549171305" />
     <state x="2133" y="8" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606037022854" />
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606186140699">
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606720230182">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606186140699" />
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606720230182" />
     <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606484288133">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
