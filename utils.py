@@ -122,8 +122,12 @@ class DatasetIterater(object):
             return batches
 
         elif self.index >= self.n_batches:
+            # 保证循环到底之后重新开始
             self.index = 0
-            raise StopIteration
+            batches = self.batches[self.index * self.batch_size: len(self.batches)]
+            self.index += 1
+            batches = self._to_tensor(batches)
+            return batches
         else:
             batches = self.batches[self.index * self.batch_size: (self.index + 1) * self.batch_size]
             self.index += 1

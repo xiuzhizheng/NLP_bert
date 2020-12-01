@@ -39,5 +39,8 @@ TNEWS_dev_iter = build_iterator(TNEWS_dev, config)
 time_dif = get_time_dif(start_time)
 
 # train
+if hasattr(torch.cuda, 'empty_cache'):
+    torch.cuda.empty_cache()
 model = x.Model(config).to(config.device)
-train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter, OCEMOTION_dev_iter, TNEWS_train_iter, TNEWS_dev_iter)
+train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter, OCEMOTION_dev_iter, TNEWS_train_iter,
+      TNEWS_dev_iter)

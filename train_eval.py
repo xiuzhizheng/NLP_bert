@@ -38,7 +38,7 @@ def train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter,
         {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}]
     # optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
     # t_total: total number of training steps for the learning
-    t_total = max([len(OCNLI_train_iter), len(OCEMOTION_train_iter), len(TNEWS_train_iter)]) * 3 * config.num_epochs
+    t_total = max([len(OCNLI_train_iter), len(OCEMOTION_train_iter), len(TNEWS_train_iter)]) * 3
     optimizer = BertAdam(optimizer_grouped_parameters,
                          lr=config.learning_rate,
                          warmup=0.05,
@@ -46,6 +46,9 @@ def train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter,
     total_batch = 0  # 记录进行到多少batch
     last_improve = 0  # 记录上次验证集loss下降的batch数
     flag = False  # 记录是否很久没有效果提升
+    OCNLI_dev_best_loss = float('inf')
+    OCEMOTION_dev_best_loss = float('inf')
+    TNEWS_dev_best_loss = float('inf')
     model.train()
     for epoch in range(config.num_epochs):
         print('Epoch [{}/{}]'.format(epoch + 1, config.num_epochs))
@@ -56,8 +59,6 @@ def train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter,
                 trains, labels = next(OCEMOTION_train_iter, (None, None))
             else:
                 trains, labels = next(TNEWS_train_iter, (None, None))
-            if train is None or labels is None:
-                continue
 
             outputs = model(trains, total_batch)
             model.zero_grad()
@@ -68,26 +69,46 @@ def train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter,
             optimizer.step()
             if total_batch % 100 == 0:
                 # 每多少轮输出在训练集和验证集上的效果
+                # 如果验证集的结果都不下降了，直接退出
                 true = labels.data.cpu()
                 predic = torch.max(outputs.data, 1)[1].cpu()
                 train_acc = metrics.accuracy_score(true, predic)
-                if total_batch % 3 == 0:
-                    dev_acc, dev_loss = evaluate(config, model, total_batch, OCNLI_dev_iter)
-                    msg = 'OCNLI_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
-                          'Val Acc: {4:>6.2%},  Time: {5} '
-                elif total_batch % 3 == 1:
-                    dev_acc, dev_loss = evaluate(config, model, total_batch, OCEMOTION_dev_iter)
-                    msg = 'OCEMOTION_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
-                          'Val Acc: {4:>6.2%},  Time: {5} '
-                else:
-                    dev_acc, dev_loss = evaluate(config, model, total_batch, TNEWS_dev_iter)
-                    msg = 'TNEWS_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
-                          'Val Acc: {4:>6.2%},  Time: {5} '
+
+                OCNLI_dev_acc, OCNLI_dev_loss = evaluate(config, model, 0, OCNLI_dev_iter)
+                OCEMOTION_dev_acc, OCEMOTION_dev_loss = evaluate(config, model, 1, OCEMOTION_dev_iter)
+                TNEWS_dev_acc, TNEWS_dev_loss = evaluate(config, model, 2, TNEWS_dev_iter)
+
+                if OCNLI_dev_loss < OCNLI_dev_best_loss:
+                    OCNLI_dev_best_loss = OCNLI_dev_loss
+                    torch.save(model.state_dict(), config.save_path)
+                    last_improve = max(last_improve, total_batch)
+                if OCEMOTION_dev_loss < OCEMOTION_dev_best_loss:
+                    OCEMOTION_dev_best_loss = OCEMOTION_dev_loss
+                    torch.save(model.state_dict(), config.save_path)
+                    last_improve = max(last_improve, total_batch)
+                if TNEWS_dev_loss < TNEWS_dev_best_loss:
+                    TNEWS_dev_best_loss = TNEWS_dev_loss
+                    torch.save(model.state_dict(), config.save_path)
+                    last_improve = max(last_improve, total_batch)
                 time_dif = get_time_dif(start_time)
-                print(msg.format(total_batch, loss.item(), train_acc, dev_loss, dev_acc, time_dif))
+                msg = 'OCNLI_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
+                      'Val Acc: {4:>6.2%},  Time: {5} '
+                print(msg.format(total_batch, loss.item(), train_acc, OCNLI_dev_acc, OCNLI_dev_loss, time_dif))
+                msg = 'OCEMOTION_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
+                      'Val Acc: {4:>6.2%},  Time: {5} '
+                print(msg.format(total_batch, loss.item(), train_acc, OCEMOTION_dev_acc, OCEMOTION_dev_loss, time_dif))
+                msg = 'TNEWS_Iter: {0:>6},  Train Loss: {1:>5.2},  Train Acc: {2:>6.2%},  Val Loss: {3:>5.2},  ' \
+                      'Val Acc: {4:>6.2%},  Time: {5} '
+                print(msg.format(total_batch, loss.item(), train_acc, TNEWS_dev_acc, TNEWS_dev_loss, time_dif))
                 model.train()
             total_batch += 1
-    torch.save(model.state_dict(), config.save_path)
+            if total_batch - last_improve > config.require_improvement:
+                # 验证集loss超过1000batch没下降，结束训练
+                print("No optimization for a long time, auto-stopping...")
+                flag = True
+                break
+        if flag:
+            break
 #     test(config, model, test_iter)
 
 

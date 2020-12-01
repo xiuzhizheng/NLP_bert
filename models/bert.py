@@ -24,11 +24,11 @@ class Config(object):
         self.save_path = dataset + '/saved_dict/' + self.model_name + '.ckpt'  # 模型训练结果
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')  # 设备
 
-        self.require_improvement = 200  # 若超过1000batch效果还没提升，则提前结束训练
+        self.require_improvement = 1000  # 若超过1000batch效果还没提升，则提前结束训练
         # self.num_classes = len(self.class_list)                         # 类别数
         self.num_epochs = 3  # epoch数
         self.batch_size = 32  # mini-batch大小
-        self.pad_size = 64  # 每句话处理成的长度(短填长切)
+        self.pad_size = 32  # 每句话处理成的长度(短填长切)
         self.learning_rate = 5e-5  # 学习率
         self.bert_path = './bert_pretrain'
         # 读取预置的 Tokenizer
