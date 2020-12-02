@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_eval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-    </list>
+    <list default="true" id="981305d6-d09f-44e8-b2dd-0f5c41482bc4" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606873440043</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修改内存OOM的bug">
+      <created>1606875257293</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1606875257293</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -206,19 +209,20 @@
     <MESSAGE value="修改bug" />
     <MESSAGE value="loss不下降时提前终止" />
     <MESSAGE value="test的时候跳出无限循环" />
-    <option name="LAST_COMMIT_MESSAGE" value="test的时候跳出无限循环" />
+    <MESSAGE value="修改内存OOM的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改内存OOM的bug" />
   </component>
   <component name="WindowStateProjectService">
     <state x="340" y="0" key="#main" timestamp="1606549184131">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="340" y="0" key="#main/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606549184131" />
-    <state x="245" y="0" key="CommitChangelistDialog2" timestamp="1606873438586">
+    <state x="245" y="0" key="CommitChangelistDialog2" timestamp="1606875256283">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="245" y="0" key="CommitChangelistDialog2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606813745699" />
     <state x="244" y="0" key="CommitChangelistDialog2/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606555238062" />
-    <state x="245" y="0" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1606873438586" />
+    <state x="245" y="0" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1606875256283" />
     <state x="121" y="55" key="DiffContextDialog" timestamp="1606184699163">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -281,16 +285,17 @@
     <state x="142" y="5" key="SettingsEditor/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606184632408" />
     <state x="142" y="5" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606549171305" />
     <state x="2133" y="8" key="SettingsEditor/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1606037022854" />
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606873522791">
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2" timestamp="1606875263409">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606813753834" />
-    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1606873522791" />
-    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606484288133">
+    <state x="233" y="94" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1606875263409" />
+    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606875342496">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720/-1920.0.1920.1080@0.0.1280.720" timestamp="1606186326941" />
     <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1606484288133" />
+    <state x="438" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720@0.0.1280.720" timestamp="1606875342496" />
     <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1606874037803">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
