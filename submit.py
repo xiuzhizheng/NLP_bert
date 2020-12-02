@@ -44,8 +44,10 @@ def submit_iterator(dataset, config, batch_size):
 def submit_evaluate(model, data_iter, task_type):
     model.eval()
     predict_all = np.array([], dtype=int)
+    n = len(data_iter)
     with torch.no_grad():
-        for texts, labels in data_iter:
+        for i in range(n):
+            texts, labels = next(data_iter)
             outputs = model(texts, task_type)
             predic = torch.max(outputs.data, 1)[1].cpu().numpy()
             predict_all = np.append(predict_all, predic)

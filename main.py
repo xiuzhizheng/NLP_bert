@@ -7,12 +7,12 @@ from train_eval import train, init_network
 from importlib import import_module
 import argparse
 from utils import build_dataset, build_iterator, get_time_dif
-# import os
-# os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 dataset = '.'  # 数据集
 
-model_name = 'bert'  # bert
+model_name = 'bert_CNN'  # bert
 # model_name = args.model  # bert
 # 动态导入模块
 x = import_module('models.' + model_name)

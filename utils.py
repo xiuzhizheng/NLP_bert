@@ -20,7 +20,7 @@ def build_dataset(config, mode='train'):
             data['content'] = data['content1'].apply(lambda x: x[:int(pad_size/2)]) + data['content2'].apply(lambda x: x[:int(pad_size/2)])
         else:
             data = pd.read_csv(path, names=['content', 'label'], sep='\t')
-        cut_ratio = int(0.9 * len(data))    # 分出10%的数据用于验证
+        cut_ratio = int(0.95 * len(data))    # 分出10%的数据用于验证
         for i in tqdm(range(len(data))):
             content = data.iloc[i]['content']
             if dataType == 'OCNLI':
