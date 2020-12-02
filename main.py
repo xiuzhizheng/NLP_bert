@@ -7,6 +7,8 @@ from train_eval import train, init_network
 from importlib import import_module
 import argparse
 from utils import build_dataset, build_iterator, get_time_dif
+# import os
+# os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 dataset = '.'  # 数据集
 
@@ -39,8 +41,6 @@ TNEWS_dev_iter = build_iterator(TNEWS_dev, config)
 time_dif = get_time_dif(start_time)
 
 # train
-if hasattr(torch.cuda, 'empty_cache'):
-    torch.cuda.empty_cache()
 model = x.Model(config).to(config.device)
 train(config, model, OCNLI_train_iter, OCNLI_dev_iter, OCEMOTION_train_iter, OCEMOTION_dev_iter, TNEWS_train_iter,
       TNEWS_dev_iter)
