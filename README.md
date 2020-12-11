@@ -1,19 +1,15 @@
 # NLP_bert
 NLP中文预训练模型泛化能力挑战赛
 
-  mian.py 训练多情感分类模型
+  mian.py 训练模型
 
   submit.py 输出提交的数据保存到submit文件夹下
 
+优化1：不确定性加权方式更新loss 
 
-  main2.py 训练自然语言推理任务模型
+Multi-task learning using uncertainty to weigh losses for scene geometry and semantics
 
-  submit2.py 输出提交的数据保存到submit文件夹下
+优化2：学习率梯度下降
 
-
-  main3.py 训练新闻文本分类模型
-
-  submit3.py 输出提交的数据保存到submit文件夹下
-
-
-后面代码可以考虑整合写成调用的形式
+下一步
+bert finetune

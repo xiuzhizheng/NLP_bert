@@ -6,7 +6,7 @@ import time
 from datetime import timedelta
 
 
-PAD, CLS = '[PAD]', '[CLS]'  # padding符号, bert中综合信息符号
+PAD, CLS, SEP = '[PAD]', '[CLS]', '[SEP]'  # padding符号, bert中综合信息符号
 
 
 def build_dataset(config, mode='train'):
@@ -16,13 +16,14 @@ def build_dataset(config, mode='train'):
         dev_contents = []
         if dataType == 'OCNLI':
             data = pd.read_csv('./data/OCNLI_train.csv', names=['content1', 'content2', 'label'], sep='\t')
-            # 将两个句子取前pad_size组合起来
-            data['content'] = data['content1'].apply(lambda x: x[:int(pad_size/2)]) + data['content2'].apply(lambda x: x[:int(pad_size/2)])
+            # # 将两个句子取前pad_size组合起来,中间要加[sep]
+            # data['content'] = data['content1'].apply(lambda x: x[:int(pad_size / 2)]) + data['content2'].apply(
+            #     lambda x: x[:int(pad_size / 2)])
         else:
             data = pd.read_csv(path, names=['content', 'label'], sep='\t')
-        cut_ratio = int(0.95 * len(data))    # 分出10%的数据用于验证
+        cut_ratio = int(0.9 * len(data))  # 分出10%的数据用于验证
         for i in tqdm(range(len(data))):
-            content = data.iloc[i]['content']
+            # 得到不同任务的label
             if dataType == 'OCNLI':
                 label = config.OCLI_class_list[data.iloc[i]['label']]
             elif dataType == 'OCEMOTION':
@@ -30,25 +31,46 @@ def build_dataset(config, mode='train'):
             else:
                 label = config.TNEWS_class_list.index(data.iloc[i]['label'])
 
-            token = config.tokenizer.tokenize(content)
-            token = [CLS] + token
-            seq_len = len(token)
-            mask = []
-            # 找到每个字对应的下标
+            # 得到不同任务的id
+            if dataType == 'OCNLI':
+                content1 = data.iloc[i]['content1']
+                token1 = config.tokenizer.tokenize(content1)
+                content2 = data.iloc[i]['content2']
+                token2 = config.tokenizer.tokenize(content2)
+                token = [CLS] + token1 + [SEP] + token2 + [SEP]
+                token_type_ids = [0] * (len(token1)+2) + [1] * (len(token2)+1)
+                # token = config.tokenizer.encode_plus(data.iloc[i]['content1'], data.iloc[i]['content2'])
+                # token_ids, token_type_ids = token["input_ids"], token["token_type_ids"]
+            else:
+                content = data.iloc[i]['content']
+                token = config.tokenizer.tokenize(content)
+                token = [CLS] + token + [SEP]
+                # token_ids = config.tokenizer.encode(data.iloc[i]['content'])
+                token_type_ids = [0] * len(token)
             token_ids = config.tokenizer.convert_tokens_to_ids(token)
+            seq_len = len(token_ids)
+            mask = []
 
             if pad_size:
                 if len(token) < pad_size:
                     mask = [1] * len(token_ids) + [0] * (pad_size - len(token))
                     token_ids += ([0] * (pad_size - len(token)))
+                    if dataType == 'OCNLI':
+                        token_type_ids += [1]*(pad_size - len(token))
+                    else:
+                        token_type_ids += [0] * (pad_size - len(token))
                 else:
                     mask = [1] * pad_size
-                    token_ids = token_ids[:pad_size]
+                    if dataType == 'OCEMOTION':
+                        token_ids = token_ids[0]+token_ids[-pad_size+1:]
+                    else:
+                        token_ids = token_ids[:pad_size]
                     seq_len = pad_size
+                    token_type_ids = token_type_ids[:pad_size]
             if i <= cut_ratio:
-                train_contents.append((token_ids, int(label), seq_len, mask))
+                train_contents.append((token_ids, int(label), seq_len, mask, token_type_ids))
             else:
-                dev_contents.append((token_ids, int(label), seq_len, mask))
+                dev_contents.append((token_ids, int(label), seq_len, mask, token_type_ids))
         return train_contents, dev_contents
 
     def load_data_test(path, dataType, pad_size=32):
@@ -56,27 +78,49 @@ def build_dataset(config, mode='train'):
         if dataType == 'OCNLI':
             data = pd.read_csv(path, names=['content1', 'content2'], sep='\t')
             # 将两个句子取前pad_size组合起来
-            data['content'] = data['content1'].apply(lambda x: x[:int(pad_size/2)]) + data['content2'].apply(lambda x: x[:int(pad_size/2)])
+            # data['content'] = data['content1'].apply(lambda x: x[-int(pad_size / 2):]) + data['content2'].apply(
+            #     lambda x: x[-int(pad_size / 2):])
         else:
             data = pd.read_csv(path, names=['content'], sep='\t')
         for i in tqdm(range(len(data))):
-            content = data.iloc[i]['content']
-            token = config.tokenizer.tokenize(content)
-            token = [CLS] + token
-            seq_len = len(token)
-            mask = []
-            # 找到每个字对应的下标
+            # 得到不同任务的id
+            if dataType == 'OCNLI':
+                content1 = data.iloc[i]['content1']
+                token1 = config.tokenizer.tokenize(content1)
+                content2 = data.iloc[i]['content2']
+                token2 = config.tokenizer.tokenize(content2)
+                token = [CLS] + token1 + [SEP] + token2 + [SEP]
+                token_type_ids = [0] * (len(token1) + 2) + [1] * (len(token2) + 1)
+                # token = config.tokenizer.encode_plus(data.iloc[i]['content1'], data.iloc[i]['content2'])
+                # token_ids, token_type_ids = token["input_ids"], token["token_type_ids"]
+            else:
+                content = data.iloc[i]['content']
+                token = config.tokenizer.tokenize(content)
+                token = [CLS] + token + [SEP]
+                # token_ids = config.tokenizer.encode(data.iloc[i]['content'])
+                token_type_ids = [0] * len(token)
             token_ids = config.tokenizer.convert_tokens_to_ids(token)
+            seq_len = len(token_ids)
+            mask = []
 
             if pad_size:
                 if len(token) < pad_size:
                     mask = [1] * len(token_ids) + [0] * (pad_size - len(token))
                     token_ids += ([0] * (pad_size - len(token)))
+                    if dataType == 'OCNLI':
+                        token_type_ids += [1] * (pad_size - len(token))
+                    else:
+                        token_type_ids += [0] * (pad_size - len(token))
                 else:
                     mask = [1] * pad_size
-                    token_ids = token_ids[:pad_size]
+                    if dataType == 'OCEMOTION':
+                        token_ids = token_ids[-pad_size:]
+                        # token_ids = token_ids[0]+token_ids[-pad_size+1:]
+                    else:
+                        token_ids = token_ids[:pad_size]
                     seq_len = pad_size
-            contents.append((token_ids, 1, seq_len, mask))
+                    token_type_ids = token_type_ids[:pad_size]
+            contents.append((token_ids, 1, seq_len, mask, token_type_ids))
         return contents
 
     if mode == 'train':
@@ -112,7 +156,8 @@ class DatasetIterater(object):
         # pad前的长度(超过pad_size的设为pad_size)
         seq_len = torch.LongTensor([_[2] for _ in datas]).to(self.device)
         mask = torch.LongTensor([_[3] for _ in datas]).to(self.device)
-        return (x, seq_len, mask), y
+        token_type_ids = torch.LongTensor([_[4] for _ in datas]).to(self.device)
+        return (x, seq_len, mask, token_type_ids), y
 
     def __next__(self):
         if self.residue and self.index == self.n_batches:
@@ -146,11 +191,6 @@ class DatasetIterater(object):
 
 def build_iterator(dataset, config):
     iter = DatasetIterater(dataset, config.batch_size, config.device)
-    return iter
-
-
-def submit_iterator(dataset, config, batch_size):
-    iter = DatasetIterater(dataset, batch_size, config.device)
     return iter
 
 

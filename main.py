@@ -12,7 +12,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 dataset = '.'  # 数据集
 
-model_name = 'bert_CNN'  # bert
+model_name = 'bert'  # bert
 # model_name = args.model  # bert
 # 动态导入模块
 x = import_module('models.' + model_name)
